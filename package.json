@@ -1,5 +1,6 @@
 {
   "name": "buyme-app",
+  "main":"server.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,6 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "express":"~4.0.0",
+    "mongoose": "~3.6.13",
+    "body-parser":"~1.0.1"
   }
 }
