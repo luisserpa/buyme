@@ -11,7 +11,7 @@ var mongoose   = require('mongoose');
 mongoose.connect('mongodb://luisserpa:1379951l@ds237489.mlab.com:37489/buyme');
 
 
-var User = require("./app/models/user");
+var User = require("./src/models/user");
 
 //configure app to use bodyParser()
 //this will let us get data from a POST
