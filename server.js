@@ -11,14 +11,14 @@ var mongoose   = require('mongoose');
 mongoose.connect('mongodb://luisserpa:1379951l@ds237489.mlab.com:37489/buyme');
 
 
-var User = require("./src/models/user");
+var User = require("./client/src/models/user");
 
 //configure app to use bodyParser()
 //this will let us get data from a POST
 app.use(bodyParser.urlencoded({extended:true}));
 app.unsubscribe(bodyParser.json());
 
-var port = process.env.PORT || 3000; //set our pot
+var port = process.env.PORT || 8080; //set our pot
 
 //ROUTES FOR OUR API
 //==========================================================
@@ -119,6 +119,11 @@ router.route("/users/:user_id")
 //REGISTER OUR ROUTES
 //all of our routes will be refixed with /api
 app.use("/api",router);
+
+//TESTS
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+  });
 
 //START THE SERVER
 //================================================================

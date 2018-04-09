@@ -1,23 +1,15 @@
 {
-  "name": "buyme-app",
-  "main":"server.js",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "0.9.5",
-    "react-navigation": "^1.5.11",
-    "react-router-dom": "^4.2.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "express":"~4.0.0",
-    "mongoose": "~3.6.13",
-    "body-parser":"~1.0.1"
+    "name": "buyme",
+    "version": "1.0.0",
+    "scripts": {
+      "client": "cd client && yarn start",
+      "server": "nodemon server.js",
+      "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    },
+    "dependencies": {
+      "express": "^4.16.2"
+    },
+    "devDependencies": {
+      "concurrently": "^3.5.0"
+    }
   }
-}
