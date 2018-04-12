@@ -1,15 +1,21 @@
 {
-    "name": "buyme",
-    "version": "1.0.0",
-    "scripts": {
-      "client": "cd client && yarn start",
-      "server": "nodemon server.js",
-      "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
-    },
-    "dependencies": {
-      "express": "^4.16.2"
-    },
-    "devDependencies": {
-      "concurrently": "^3.5.0"
-    }
+  "name": "buyme",
+  "main": "server.js",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "express": "~4.0.0",
+    "mongoose": "~3.6.13",
+    "body-parser": "~1.0.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "knex": "^0.14.6",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
   }
+}

@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FlashMessage} from "../flash-messages";
+import addUser from "../../../server/services/user-service";
+import verification from "../../../server/services/verification-service";
 
 let userData;
 
-const Button = () => {
+const Button = (props) => {
+  var userData=props.userData;
+
+  //define the create user function
+  function createUser(){
+    //first run a verification on the introduced data
+    verification(userData);
+    console.log("DATA IN REGISTER: ",userData);
+    addUser(userData);
+  }
+  
   return (
     <div>
       <p>
-        <input type="submit" value="Create Count" />
+        <input type="submit" value="Create Count" onClick={createUser} />
       </p>
     </div>
   );
@@ -30,9 +43,9 @@ const Input = props => {
       <p>
         <input
           type="text"
-          name="displayName"
+          name="username"
           placeholder="your display name"
-          value={value.diplayName}
+          value={value.username}
           onChange={onChange}
         />
       </p>
@@ -54,6 +67,8 @@ const Input = props => {
           onChange={onChange}
         />
       </p>
+      <Button 
+            userData={value}/>
     </div>
   );
 };
@@ -63,7 +78,7 @@ class Register extends React.Component {
     super(props);
     this.state = {
       email: "",
-      displayName: "",
+      username: "",
       password: "",
       retypePassword: ""
     };
@@ -84,8 +99,8 @@ class Register extends React.Component {
             handleInputChange={this.handleInputChange}
             stateValues={this.state}
           />
-          <Button />
         </form>
+        <FlashMessage />
       </div>
     );
   }
