@@ -1,4 +1,4 @@
-import validateEmail from "../../imports/email-validations";
+var validateEmail = require ("../../imports/email-validations")
 
 function addUserVerification(user){
     var email = user.email;
@@ -10,9 +10,10 @@ function addUserVerification(user){
     if (!validateEmail(email)){
         return{
             showMessage:true,
-            message:"Not a valid email."
+            message:"Not a valid email.",
+            addUser:false
         };
     }
 }
 
-export default validateEmail;
+module.exports = addUserVerification;

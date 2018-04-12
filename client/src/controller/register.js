@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { FlashMessage} from "../flash-messages";
+import { FlashMessage } from "../flash-messages";
 import addUser from "../../../server/services/user-service";
 import verification from "../../../server/services/verification-service";
 
 let userData;
+/*
+let flashMessageStatus = {
+  showMessage: false,
+  message: "",
+  addUser: false
+};
+*/
 
 const Button = (props) => {
-  var userData=props.userData;
+  var userData = props.userData;
 
   //define the create user function
-  function createUser(){
+  function createUser() {
     //first run a verification on the introduced data
-    verification(userData);
-    console.log("DATA IN REGISTER: ",userData);
-    addUser(userData);
+    props.updtateMessageStatus = verification(userData);
+    if (verification(userData).addUser === true) {
+      addUser(userData);
+    }
+
   }
-  
+
   return (
     <div>
       <p>
@@ -67,8 +76,7 @@ const Input = props => {
           onChange={onChange}
         />
       </p>
-      <Button 
-            userData={value}/>
+
     </div>
   );
 };
@@ -80,7 +88,8 @@ class Register extends React.Component {
       email: "",
       username: "",
       password: "",
-      retypePassword: ""
+      retypePassword: "",
+      flashMessageStatus: {}
     };
   }
 
@@ -90,8 +99,13 @@ class Register extends React.Component {
     this.setState(state);
   };
 
+  myCallback = (dataFromChild) => {
+    this.setState({ flashMessageStatus: dataFromChild });
+  };
+
   render() {
     userData = this.state;
+    console.log("STATUS IN REGISTER: ", this.state.flashMessageStatus);
     return (
       <div>
         <form>
@@ -100,7 +114,11 @@ class Register extends React.Component {
             stateValues={this.state}
           />
         </form>
-        <FlashMessage />
+        <Button
+          userData={this.state}
+          messageStatus={this.state.flashMessageStatus}
+          updtateMessageStatus={this.myCallBack} />
+        <FlashMessage status={this.state.flashMessageStatus} />
       </div>
     );
   }
