@@ -8,7 +8,7 @@ class FlashMessage extends React.Component {
             this.props.onChange();
             flashMessage = (
                 <div>
-                    teste
+                    {this.props.status.message}
                 </div>
             )
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FlashMessage, onChange } from "../flash-messages";
-import addUser from "../../../server/services/user-service";
+import userService from "../../../server/services/user-service";
 import verification from "../../../server/services/verification-service";
 
 let userData;
@@ -23,7 +23,7 @@ const Button = (props) => {
     props.onClick(verification(userData));
     //props.messageStatus = verification(userData);
     if (verification(userData).addUser === true) {
-      addUser(userData);
+      userService.addUser(userData);
     }
 
   }

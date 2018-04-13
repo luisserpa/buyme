@@ -8,5 +8,14 @@ module.exports = {
           username,
           password
       })
+    },
+
+    authenticate ({email}){
+      return knex("user").where({email})
+        .then(([user]) => {
+          if(!user) return {success:false}
+          console.log("USER IN DAO: ",user);
+          return {success:user};
+        });
     }
   }
