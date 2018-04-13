@@ -106,6 +106,21 @@ class Register extends React.Component {
     console.log("FLASH MESSAGE STATUS: ",this.state.flashMessageStatus);
   };
 
+  //To timeout the flash message
+  onChange = () => {
+    
+      setTimeout(function () {
+        this.setState({
+          flashMessageStatus:{
+            showMessage: false,
+            message: "",
+          }
+           
+        });
+    }.bind(this), 3000);
+    
+  }
+
   render() {
     userData = this.state;
     console.log("STATUS IN REGISTER: ", this.state.flashMessageStatus);
@@ -121,7 +136,9 @@ class Register extends React.Component {
           userData={this.state}
           messageStatus={this.state.flashMessageStatus}
           onClick={this.onClick} />
-        <FlashMessage status={this.state.flashMessageStatus} />
+        <FlashMessage
+          status={this.state.flashMessageStatus}
+          onChange={this.onChange} />
       </div>
     );
   }
