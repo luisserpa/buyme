@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { FlashMessage } from "../flash-messages";
+import { FlashMessage, onChange } from "../flash-messages";
 import addUser from "../../../server/services/user-service";
 import verification from "../../../server/services/verification-service";
 
@@ -108,22 +108,11 @@ class Register extends React.Component {
 
   //To timeout the flash message
   onChange = () => {
-    
-      setTimeout(function () {
-        this.setState({
-          flashMessageStatus:{
-            showMessage: false,
-            message: "",
-          }
-           
-        });
-    }.bind(this), 3000);
-    
+      onChange(this);
   }
 
   render() {
     userData = this.state;
-    console.log("STATUS IN REGISTER: ", this.state.flashMessageStatus);
     return (
       <div>
         <form>

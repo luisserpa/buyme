@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 
 class FlashMessage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showMessage: false,
-            message: "",
-            addUser: false
 
-        };
-    }
-
-    render() {
+    onCreateUser = () => {
         let flashMessage;
         if (this.props.status.showMessage) {
-            //this.setState(this.props.status);
-            this.props.onChange()
+            this.props.onChange();
             flashMessage = (
                 <div>
                     teste
@@ -30,9 +20,15 @@ class FlashMessage extends React.Component {
             )
         };
 
+        return flashMessage;
+
+    }
+
+    render() {
+    
         return (
             <div>
-                {flashMessage}
+                {this.onCreateUser()}
             </div>
         )
     }
@@ -41,4 +37,16 @@ class FlashMessage extends React.Component {
 
 }
 
-export { FlashMessage };
+//This function is called from the parent class to trigger the timer
+function onChange(objectClass) {
+    setTimeout(function () {
+        objectClass.setState({
+            flashMessageStatus: {
+                showMessage: false,
+                message: ""
+            }
+        });
+    }, 3000);
+}
+
+export { FlashMessage, onChange };
