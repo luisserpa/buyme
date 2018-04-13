@@ -3,34 +3,59 @@ import React, { Component } from "react";
 class FlashMessage extends React.Component {
     constructor(props) {
         super(props);
-        console.log("THIS PROPS: ",this.props.status);
-        this.state = this.props.status;
-        console.log("STATE: ", this.state);
+        this.state = {
+            showMessage: false,
+            message: "",
+            addUser: false
+
+        };
     }
 
 
     //Time out for the flash message to disapear
     messageTimeout = () => {
         console.log("ENTERED HERE");
-        setTimeout(function () { this.setState({ showMessage: false }); }.bind(this), 3000);
+        setTimeout(function () {
+            this.setState({
+                showMessage: false,
+                message: "",
+                addUser: false
+            });
+        }.bind(this), 3000);
     };
 
-    render() {
-        console.log("PROPS: ",this.props);
-        if (this.state.showMessage === true) {
-            this.messageTimeout();
-            return (
-                <div>
-                    teste
-                    </div>
-            );
+    componentWillReceiveProps(newProps){
+        this.setState({showMessage:true});
+        this.messageTimeout();
+        
+  }
 
-        } else {
-            return (
+    render() {
+        let flashMessage;
+        if (this.props.status.showMessage) {
+            //this.setState(this.props.status);
+            this.componentWillReceiveProps(this.props);
+            console.log("OLA");
+            if(this.state.showMessage){
+                flashMessage = (
+                    <div>
+                        teste
+                    </div>
+                )
+            }
+          
+        }else{
+            flashMessage = (
                 <div>
                 </div>
             )
         };
+
+        return(
+            <div>
+                {flashMessage}
+            </div>
+        )
     }
 
 

@@ -19,7 +19,9 @@ const Button = (props) => {
   //define the create user function
   function createUser() {
     //first run a verification on the introduced data
-    props.updtateMessageStatus = verification(userData);
+    console.log("MESSAGE STATUS: ",props);
+    props.onClick(verification(userData));
+    //props.messageStatus = verification(userData);
     if (verification(userData).addUser === true) {
       addUser(userData);
     }
@@ -99,8 +101,9 @@ class Register extends React.Component {
     this.setState(state);
   };
 
-  myCallback = (dataFromChild) => {
-    this.setState({ flashMessageStatus: dataFromChild });
+  onClick = data => {
+    this.setState({ flashMessageStatus: data });
+    console.log("FLASH MESSAGE STATUS: ",this.state.flashMessageStatus);
   };
 
   render() {
@@ -117,7 +120,7 @@ class Register extends React.Component {
         <Button
           userData={this.state}
           messageStatus={this.state.flashMessageStatus}
-          updtateMessageStatus={this.myCallBack} />
+          onClick={this.onClick} />
         <FlashMessage status={this.state.flashMessageStatus} />
       </div>
     );
