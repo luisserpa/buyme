@@ -112,6 +112,20 @@ class Register extends React.Component {
     onChange(this);
   }
 
+  componentDidMount = () => {
+    //var user = userService.findAll();
+    console.log("USERS: ",userService.findAll());
+   //this.getUser();
+   //return this.getUser();
+  }
+
+  getUser = async() => {
+    
+    console.log(userService.findAll());
+   
+
+  }
+
   render() {
     userData = this.state;
     return (
