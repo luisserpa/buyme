@@ -1,7 +1,6 @@
-var validateEmail = require ("../../imports/email-validations");
-var userService = require("./user-service");
+var validateEmail = require ("./email-validations");
 
-function addUserVerification(user){
+function addUserVerification(user,userService){
     var email = user.email;
     var username = user.username;
     var password = user.password;

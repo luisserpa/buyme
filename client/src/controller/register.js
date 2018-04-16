@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FlashMessage, onChange } from "../flash-messages";
-import userService from "../../../server/services/user-service";
-import verification from "../../../server/services/verification-service";
+import userService from "../service/user-service";
+import verification from "../../../imports/verification-service";
 
 let userData;
 /*
@@ -13,17 +13,25 @@ let flashMessageStatus = {
 };
 */
 
+
+
 const Button = (props) => {
   var userData = props.userData;
 
   //define the create user function
   function createUser() {
+    
     //first run a verification on the introduced data
-    console.log("MESSAGE STATUS: ",props);
+    console.log("MESSAGE STATUS: ", props);
     props.onClick(verification(userData));
     //props.messageStatus = verification(userData);
-    if (verification(userData).addUser === true) {
-      userService.addUser(userData);
+    if (verification(userData,userService).addUser === true) {
+
+      
+
+     
+
+      //userService.addUser(userData);
     }
 
   }
@@ -103,13 +111,19 @@ class Register extends React.Component {
 
   onClick = data => {
     this.setState({ flashMessageStatus: data });
-    console.log("FLASH MESSAGE STATUS: ",this.state.flashMessageStatus);
+    console.log("FLASH MESSAGE STATUS: ", this.state.flashMessageStatus);
   };
 
   //To timeout the flash message
   onChange = () => {
-      onChange(this);
+    onChange(this);
   }
+  
+  componentDidMount() {
+    userService.findAll();
+  }
+
+
 
   render() {
     userData = this.state;
@@ -120,11 +134,12 @@ class Register extends React.Component {
             handleInputChange={this.handleInputChange}
             stateValues={this.state}
           />
+          <Button
+            userData={this.state}
+            messageStatus={this.state.flashMessageStatus}
+            onClick={this.onClick} />
         </form>
-        <Button
-          userData={this.state}
-          messageStatus={this.state.flashMessageStatus}
-          onClick={this.onClick} />
+
         <FlashMessage
           status={this.state.flashMessageStatus}
           onChange={this.onChange} />
