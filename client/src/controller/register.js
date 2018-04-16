@@ -5,33 +5,26 @@ import userService from "../service/user-service";
 import verification from "../../../imports/verification-service";
 
 let userData;
-/*
-let flashMessageStatus = {
-  showMessage: false,
-  message: "",
-  addUser: false
-};
-*/
-
-
 
 const Button = (props) => {
   var userData = props.userData;
 
   //define the create user function
   function createUser() {
-    
+
     //first run a verification on the introduced data
     console.log("MESSAGE STATUS: ", props);
     props.onClick(verification(userData));
     //props.messageStatus = verification(userData);
-    if (verification(userData,userService).addUser === true) {
+    if (verification(userData, userService).addUser === true) {
 
-      
+      var newUser = {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password
+      };
 
-     
-
-      //userService.addUser(userData);
+      userService.addUser(newUser);
     }
 
   }
@@ -118,12 +111,6 @@ class Register extends React.Component {
   onChange = () => {
     onChange(this);
   }
-  
-  componentDidMount() {
-    userService.findAll();
-  }
-
-
 
   render() {
     userData = this.state;

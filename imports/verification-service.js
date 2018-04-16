@@ -42,8 +42,15 @@ function addUserVerification(user,userService){
         }; 
     };
 
+
     //Verify of the user already exists
-    console.log("USER FOUND? ",userService.findByEmail(email));
+    //console.log("USER FOUND? ",userService.findByEmail(email));
+
+    return{
+        showMessage:true,
+        message:"User created successfully!",
+        addUser:true
+    };
 }
 
 module.exports = addUserVerification;
