@@ -109,22 +109,21 @@ class Register extends React.Component {
 
   //To timeout the flash message
   onChange = () => {
+    
+  
     onChange(this);
   }
 
   componentDidMount = () => {
-    //var user = userService.findAll();
-    console.log("USERS: ",userService.findAll());
-   //this.getUser();
-   //return this.getUser();
-  }
-
-  getUser = async() => {
-    
-    console.log(userService.findAll());
-   
+    var id = "5ad4aecc7eac3f1c0056d4cc";
+    userService.findById(id)
+      .then(res => {
+        console.log("RES: ",res);
+      });
 
   }
+
+
 
   render() {
     userData = this.state;
