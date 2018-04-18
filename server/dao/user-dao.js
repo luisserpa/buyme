@@ -36,6 +36,16 @@ function findById(router,User){
     });
 };
 
+function findByEmail(router,User){
+    router.get("/useremail/:email", function(req,res){
+        User.find({email:req.params.email}, function(err, user){
+            if(err) return res.status(500).send("There was a problem finding an user by email");
+            if(!user) return res.status(404).send("No user found");
+            res.status(200).send(user);
+        });
+    });
+};
+
 function deleteUser(router,User){
     router.delete("/:id", function(req,res){
 
@@ -56,4 +66,4 @@ function updateUser(router, User){
     });
 };
 
-module.exports={addUser,findAll, findById, deleteUser, updateUser };
+module.exports={addUser,findAll, findById, findByEmail, deleteUser, updateUser };

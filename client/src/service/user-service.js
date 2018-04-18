@@ -1,11 +1,9 @@
-import { callbackify } from "util";
-
 var axios = require("axios");
 
-async function findAll() {
+function findAll() {
 
   // The await keyword saves us from having to write a .then() block.
-  let json = await axios.get('http://localhost:8080/users');
+  //let json = await axios.get('http://localhost:8080/users');
 
   return (
     axios.get('http://localhost:8080/users', {
@@ -45,19 +43,27 @@ function findById(userId) {
     axios.get('http://localhost:8080/users/' + userId)
       .then(function (response) {
         console.log(response);
-        return response.data;
+        return response.data[0];
       })
       .catch(function (error) {
         console.log(error);
       })
   )
+}
 
-
-
-
+function findByEmail(userEmail) {
+  return (
+    axios.get('http://localhost:8080/users/useremail/' + userEmail)
+      .then(function (response) {
+        console.log(response);
+        return response.data[0];
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  )
 }
 
 
 
-
-module.exports = { findAll, addUser, findById };
+module.exports = { findAll, addUser, findById, findByEmail };

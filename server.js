@@ -8,7 +8,7 @@ var router = express.Router();
 var bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
-var userService = require("./server/dao/user-dao");
+var userDao = require("./server/dao/user-dao");
 var User = require("./server/model/user");
 
 const cors = require ("cors");
@@ -28,15 +28,17 @@ app.use("/users", router);
  
 
 //Connect to the services
-userService.addUser(router,User);
+userDao.addUser(router,User);
 
-userService.findAll(router,User);
+userDao.findAll(router,User);
 
-userService.findById(router,User);
+userDao.findById(router,User);
 
-userService.deleteUser(router,User),
+userDao.findByEmail(router,User);
 
-userService.updateUser(router,User);
+userDao.deleteUser(router,User),
+
+userDao.updateUser(router,User);
 
 //START THE SERVER
 //================================================================

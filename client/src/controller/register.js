@@ -8,24 +8,28 @@ let userData;
 
 const Button = (props) => {
   var userData = props.userData;
+  var messageStatus;
 
   //define the create user function
-  function createUser() {
+  function createUser(userData, userService) {
 
-    //first run a verification on the introduced data
-    console.log("MESSAGE STATUS: ", props);
-    props.onClick(verification(userData));
-    //props.messageStatus = verification(userData);
-    if (verification(userData, userService).addUser === true) {
+    verification.userVerification(userData, userService)
+      .then(res => {
+        messageStatus = res;
+        if (messageStatus.addUser) {
+          var newUser = {
+            username: userData.username,
+            email: userData.email,
+            password: userData.password
+          };
 
-      var newUser = {
-        username: userData.username,
-        email: userData.email,
-        password: userData.password
-      };
+          userService.addUser(newUser);
 
-      userService.addUser(newUser);
-    }
+        };
+
+        props.onClick(messageStatus);
+
+      });
 
   }
 
@@ -109,21 +113,9 @@ class Register extends React.Component {
 
   //To timeout the flash message
   onChange = () => {
-    
-  
+
     onChange(this);
   }
-
-  componentDidMount = () => {
-    var id = "5ad4aecc7eac3f1c0056d4cc";
-    userService.findById(id)
-      .then(res => {
-        console.log("RES: ",res);
-      });
-
-  }
-
-
 
   render() {
     userData = this.state;
