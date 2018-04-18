@@ -7,11 +7,13 @@ import verification from "../../../imports/verification-service";
 let userData;
 
 const Button = (props) => {
-  var userData = props.userData;
+  
   var messageStatus;
 
   //define the create user function
-  function createUser(userData, userService) {
+  function createUser() {
+
+    var userData = props.userData;
 
     verification.userVerification(userData, userService)
       .then(res => {
