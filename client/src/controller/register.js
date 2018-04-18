@@ -7,7 +7,7 @@ import verification from "../../../imports/verification-service";
 let userData;
 
 const Button = (props) => {
-  
+
   var messageStatus;
 
   //define the create user function
@@ -128,11 +128,13 @@ class Register extends React.Component {
             handleInputChange={this.handleInputChange}
             stateValues={this.state}
           />
-          <Button
-            userData={this.state}
-            messageStatus={this.state.flashMessageStatus}
-            onClick={this.onClick} />
+
         </form>
+
+        <Button
+          userData={this.state}
+          messageStatus={this.state.flashMessageStatus}
+          onClick={this.onClick} />
 
         <FlashMessage
           status={this.state.flashMessageStatus}
