@@ -6,42 +6,67 @@ import verification from "../../../imports/verification-service";
 
 let userData;
 
-const Button = (props) => {
+class Button extends React.Component {
 
-  var messageStatus;
+  constructor(props) {
+    super(props);
+    this.state = this.props.userData;
+    this.onClick = this.props.onClick;
+    console.log("STATE: ", this.state);
+  };
+
 
   //define the create user function
-  function createUser() {
+  createUser = () => {
 
-    var userData = props.userData;
+    this.setState(this.props.userData);
+    var userData = this.props.userData;
 
     verification.userVerification(userData, userService)
       .then(res => {
-        messageStatus = res;
-        if (messageStatus.addUser) {
+        this.setState({ flashMessageStatus: res });
+
+        if (this.state.flashMessageStatus.addUser) {
           var newUser = {
             username: userData.username,
             email: userData.email,
             password: userData.password
           };
 
+
           userService.addUser(newUser);
 
         };
+        this.onClick(this.state.flashMessageStatus);
 
-        props.onClick(messageStatus);
+        if (res.addUser === true) {
+          window.location.replace("/");
+        }
+
 
       });
 
   }
 
-  return (
-    <div>
-      <p>
-        <input type="submit" value="Create Count" onClick={createUser} />
-      </p>
-    </div>
-  );
+
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+
+        <p>
+
+          <input type="submit" value="Create Count" onClick={this.createUser} />
+
+        </p>
+
+      </div>
+    );
+  };
+
+
+
+
 };
 
 const Input = props => {
