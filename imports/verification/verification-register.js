@@ -1,4 +1,4 @@
-var validateEmail = require("./email-validations");
+var validateEmail = require("../email-validations");
 
 function userVerification(user, userService) {
     var email = user.email;

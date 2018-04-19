@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FlashMessage, onChange } from "../flash-messages";
 import userService from "../service/user-service";
-import verification from "../../../imports/verification-service";
+import verification from "../../../imports/verification/verification-register";
 
 let userData;
 
@@ -158,7 +158,6 @@ class Register extends React.Component {
 
         <Button
           userData={this.state}
-          messageStatus={this.state.flashMessageStatus}
           onClick={this.onClick} />
 
         <FlashMessage
