@@ -6,27 +6,20 @@ import verification from "../../../imports/verification/verification-register";
 
 let userData;
 
-class Button extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = this.props.userData;
-    this.onClick = this.props.onClick;
-    console.log("STATE: ", this.state);
-  };
+const Button = (props) =>  {
 
 
   //define the create user function
-  createUser = () => {
+  function createUser() {
 
-    this.setState(this.props.userData);
-    var userData = this.props.userData;
+    var userData = props.userData;
+    var messageStatus="";
 
     verification.userVerification(userData, userService)
       .then(res => {
-        this.setState({ flashMessageStatus: res });
+        messageStatus = res;
 
-        if (this.state.flashMessageStatus.addUser) {
+        if (messageStatus.addUser === true) {
           var newUser = {
             username: userData.username,
             email: userData.email,
@@ -37,35 +30,31 @@ class Button extends React.Component {
           userService.addUser(newUser);
 
         };
-        this.onClick(this.state.flashMessageStatus);
 
-        if (res.addUser === true) {
+        props.onClick(messageStatus);
+
+        if (messageStatus.addUser === true) {
           window.location.replace("/");
         }
 
 
       });
 
-  }
+  };
 
 
-  render() {
-    console.log(this.state);
+
     return (
       <div>
 
         <p>
 
-          <input type="submit" value="Create Count" onClick={this.createUser} />
+          <input type="submit" value="Create Count" onClick={createUser} />
 
         </p>
 
       </div>
     );
-  };
-
-
-
 
 };
 
@@ -125,6 +114,9 @@ class Register extends React.Component {
       retypePassword: "",
       flashMessageStatus: {}
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   handleInputChange = e => {
