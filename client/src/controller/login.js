@@ -16,44 +16,34 @@ const Anchor = props => {
   );
 };
 
-class Button extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props.userData;
-    this.onClick = this.props.onClick;
-  }
-  
-  authenticate = () => {
+const Button = (props) => {
 
-    var user = this.props.userData;
+  function authenticate (){
+
+    var user = props.userData;
+    var messageStatus = "";
 
     verification.authenticate(user, userService)
       .then(res => {
-        this.setState({flashMessageStatus:res});
+        messageStatus = res;
 
-        this.onClick(this.state.flashMessageStatus);
+        props.onClick(messageStatus);
 
         //if it passed all the authentications
-        if (res.isUser === true) {
+        if (messageStatus.isUser === true) {
           //goes to the dashboard
           window.location.replace("/dashboard");
         }
       })
   };
-  
 
-  render() {
     return (
       <div>
         <p>
-          <input type="submit" value="Login" onClick={this.authenticate} />
+          <input type="submit" value="Login" onClick={authenticate} />
         </p>
       </div>
     )
-  }
-
-
-
 }
 
 const Input = (props) => {
@@ -87,7 +77,10 @@ class Login extends React.Component {
       email: "",
       password: "",
       flashMessageStatus: {}
-    }
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   };
 
   handleInputChange = e => {
@@ -101,7 +94,6 @@ class Login extends React.Component {
   }
 
   onClick = data => {
-    console.log("DATA: ",data);
     this.setState({ flashMessageStatus: data });
   };
 
@@ -118,9 +110,9 @@ class Login extends React.Component {
         </form>
 
         <Button userData={this.state}
-            onClick={this.onClick} />
+          onClick={this.onClick} />
 
-          <Anchor />
+        <Anchor />
 
         <FlashMessage
           status={this.state.flashMessageStatus}

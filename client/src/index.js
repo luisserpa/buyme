@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Login } from "./controller/login.js";
 import { Register } from "./controller/register.js";
 import { Dashboard } from "./controller/dashboard.js";
-//<Route path="/dashboard" component={Dashboard}/>
+
 ReactDOM.render(
   <Router>
     <div>
