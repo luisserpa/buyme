@@ -27,6 +27,7 @@ class Header extends React.Component {
                 <Messages />
                 <LogOut />
                 <Map />
+                <Dashboard />
             </div>
         )
     }
@@ -65,6 +66,17 @@ const Map = () => {
 
     return (
         <button onClick={goToMap}>Map</button>
+    )
+}
+
+const Dashboard = () => {
+
+    function goToDashboard() {
+        window.location.replace("/seller/dashboard");
+    }
+
+    return (
+        <button onClick={goToDashboard}>Dashboard</button>
     )
 }
 

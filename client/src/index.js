@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Login } from "./controller/login.js";
 import { Register } from "./controller/register.js";
 import { DashboardSeller } from "./controller/seller/dashboard.js";
+import {SellerMap} from "../src/controller/seller/map";
 
 class App extends React.Component {
 
@@ -11,7 +12,9 @@ class App extends React.Component {
     let sessionUser = localStorage.getItem("sessionUser");
     if (sessionUser === "undefined") {
       return (
+        
         <Router>
+          <h1>ola</h1>
           <div>
             <Route exact path="/" component={Login} />
             <Route path="/register" component={Register} />
