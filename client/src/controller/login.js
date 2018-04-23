@@ -31,8 +31,10 @@ const Button = (props) => {
 
         //if it passed all the authentications
         if (messageStatus.isUser === true) {
+          //save the user in the local storage
+          localStorage.setItem("sessionUser",user.email);
           //goes to the dashboard
-          window.location.replace("/dashboard");
+          window.location.replace("/seller/dashboard");
         }
       })
   };
