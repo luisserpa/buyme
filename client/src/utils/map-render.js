@@ -10,8 +10,13 @@ function startMap(id){
         map: map,
         title: "Test",
         draggable:true
-    
+
       });
-}
+
+      
+
+};
+
+
 
 module.exports = {startMap};
