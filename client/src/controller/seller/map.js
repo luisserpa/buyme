@@ -8,6 +8,7 @@ class SellerMap extends React.Component {
         console.log("MAP RENDER: ",mapRender);
         mapRender.startMap("map");
     }
+    
 
     render() {
         console.log("HERE");
